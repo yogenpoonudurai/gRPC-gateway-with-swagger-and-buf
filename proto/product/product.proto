@@ -1,8 +1,7 @@
 syntax = "proto3";
-
 package product;
 
-option go_package = "./proto";
+option go_package = "github.com/firacloudtech/grpc-echo-benchmark/proto/product";
 
 
 service ProductService {
