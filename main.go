@@ -1,10 +1,15 @@
 package main
 
 import (
+	"context"
 	"flag"
-	"net/http"
+	"fmt"
+	"log"
+	"net"
 
-	pb "github.com/firacloudtech/grpc-echo-benchmark/proto/product"
+	pb "github/firacloudtech/grpc-echo-benchmark/proto/product"
+
+	"google.golang.org/grpc"
 )
 
 var (
@@ -12,13 +17,29 @@ var (
 )
 
 type server struct {
-	pb.UnimplementedGreeterServer
+	pb.UnimplementedProductServiceServer
 }
 
 func NewServer() *server {
 	return &server{}
 }
 
-func (s *server) SayHello(req *http.Request) error {
+func (s *server) SayHello(ctx context.Context, req *pb.CreateRequest) (*pb.CreateResponse, error) {
 
+	return &pb.CreateResponse{Message: req.Name}, nil
+}
+
+func main() {
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", port))
+
+	if err != nil {
+		log.Fatalf("Failed to listen: %v", err)
+	}
+
+	s := grpc.NewServer()
+
+	pb.RegisterProductServiceServer(s, &server{})
+
+	log.Printf("Serving gPRC on port %d", port)
+	log.Fatal(s.Serve(lis))
 }

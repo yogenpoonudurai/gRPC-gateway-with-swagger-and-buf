@@ -8,7 +8,6 @@ option go_package = "./proto/product";
 
 service ProductService {
 	rpc Create(CreateRequest) returns (CreateRequest){
-
 	}
 	rpc Read(ReadRequest) returns (ReadResponse) {}
   rpc Update(UpdateRequest) returns (UpdateResponse) {}
@@ -20,7 +19,7 @@ message CreateRequest {
 }
 
 message CreateResponse {
-  string id = 1;
+  string message = 1;
 }
 
 message ReadRequest {
