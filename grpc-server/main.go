@@ -7,26 +7,26 @@ import (
 	"log"
 	"net"
 
-	pb "github/firacloudtech/grpc-echo-benchmark/proto/product"
+	productv1 "github.com/firacloudtech/grpc-echo-benchmark/gen/proto/go/product/v1"
 
 	"google.golang.org/grpc"
 )
 
 var (
-	port = flag.Int("port", 50051, "Server port")
+	port = flag.Int("port", 5001, "Server port")
 )
 
 type server struct {
-	pb.UnimplementedProductServiceServer
+	productv1.UnimplementedProductServiceServer
 }
 
 func NewServer() *server {
 	return &server{}
 }
 
-func (s *server) SayHello(ctx context.Context, req *pb.CreateRequest) (*pb.CreateResponse, error) {
+func (s *server) SayHello(ctx context.Context, req *productv1.CreateRequest) (*productv1.CreateResponse, error) {
 
-	return &pb.CreateResponse{Message: req.Name}, nil
+	return &productv1.CreateResponse{Message: req.Name}, nil
 }
 
 func main() {
@@ -38,7 +38,7 @@ func main() {
 
 	s := grpc.NewServer()
 
-	pb.RegisterProductServiceServer(s, &server{})
+	productv1.RegisterProductServiceServer(s, &server{})
 
 	log.Printf("Serving gPRC on port %d", port)
 	log.Fatal(s.Serve(lis))
