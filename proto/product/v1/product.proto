@@ -1,13 +1,10 @@
 syntax = "proto3";
-package product;
+package product.v1;
 
 option go_package = "./proto/product";
 
-
-
-
 service ProductService {
-	rpc Create(CreateRequest) returns (CreateRequest){
+	rpc Create(CreateRequest) returns (CreateResponse){
 	}
 	rpc Read(ReadRequest) returns (ReadResponse) {}
   rpc Update(UpdateRequest) returns (UpdateResponse) {}
