@@ -8,5 +8,5 @@ build:
 	buf build --exclude-source-info -o -#format=json | jq '.file[] | .package'
 
 buf-generate:
-	buf generate
+	buf generate buf.build/${BUF_USER}/grpc-echo-benchmark
 

@@ -1,0 +1,18 @@
+syntax = "proto3";
+package order.v1;
+
+option go_package = "github.com/firacloudtech/grpc-echo-benchmark/proto/order";
+
+service OrderService {
+	rpc CreateOrder(CreateRequest) returns (CreateResponse){
+	}
+}
+
+
+message CreateRequest {
+string name = 1;
+}
+
+message CreateResponse {
+	string message = 1;
+}

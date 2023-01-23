@@ -1,45 +1,76 @@
 syntax = "proto3";
 package product.v1;
 
-option go_package = "./proto/product";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/firacloudtech/grpc-echo-benchmark/proto/product";
+
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {version: "1.0"};
+  external_docs: {
+    url: "https://github.com/firacloudtech/grpc-echo-benchmark";
+    description: "gRPC gateway";
+  }
+  schemes: HTTPS;
+};
+
 
 service ProductService {
-	rpc Create(CreateRequest) returns (CreateResponse){
+	rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse){
+		option (google.api.http)= {
+
+			post : "/v1/products/create",
+			body: "*"
+
+		};
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) ={
+			summary: "Add a product"
+      description: "Add a product to the server."
+      tags: "Product"
+		};
 	}
-	rpc Read(ReadRequest) returns (ReadResponse) {}
-  rpc Update(UpdateRequest) returns (UpdateResponse) {}
-  rpc Delete(DeleteRequest) returns (DeleteResponse) {}
+	rpc ReadProduct(ReadProductRequest) returns (ReadProductResponse) {
+
+		option (google.api.http) = {
+			post : "/v1/products/read",
+			body: "*"
+		};
+	}
+  rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse) {}
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse) {}
 }
 
-message CreateRequest {
+message CreateProductRequest {
 	string name = 1;
 }
 
-message CreateResponse {
+message CreateProductResponse {
   string message = 1;
 }
 
-message ReadRequest {
+message ReadProductRequest {
   string id = 1;
 }
 
-message ReadResponse {
+message ReadProductResponse {
   string name = 1;
 }
 
-message UpdateRequest {
+message UpdateProductRequest {
   string id = 1;
   string name = 2;
 }
 
-message UpdateResponse {
+message UpdateProductResponse {
   bool success = 1;
 }
 
-message DeleteRequest {
+message DeleteProductRequest {
   string id = 1;
 }
 
-message DeleteResponse {
+message DeleteProductResponse {
   bool success = 1;
 }
