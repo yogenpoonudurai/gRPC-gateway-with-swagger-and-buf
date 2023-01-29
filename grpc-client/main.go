@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	orderv1 "github.com/firacloudtech/grpc-gateway-swagger-buf/gen/go/order/v1"
-	productv1 "github.com/firacloudtech/grpc-gateway-swagger-buf/gen/go/product/v1"
+	orderv1 "github.com/$BUF_USER/grpc-gateway-swagger-buf/gen/go/order/v1"
+	productv1 "github.com/$BUF_USER/grpc-gateway-swagger-buf/gen/go/product/v1"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"

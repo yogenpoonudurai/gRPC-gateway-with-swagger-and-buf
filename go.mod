@@ -1,4 +1,4 @@
-module github.com/firacloudtech/grpc-gateway-swagger-buf
+module github.com/$BUF_USER/grpc-gateway-swagger-buf
 
 go 1.19
 

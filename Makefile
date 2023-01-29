@@ -8,4 +8,4 @@ run-client:
 	cd ./grpc-client && go run main.go
 
 buf-push:
-	cd ./proto && buf push
+	buf build && cd ./proto && buf push

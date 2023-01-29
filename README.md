@@ -16,7 +16,7 @@ Clone the repository.bash
 git clone git@github.com:firacloudtech/grpc-gateway-with-swagger-with-buf.git
 ```
 
-Register a Buf account and follow the instruction to update your BUF_USER environment variable.
+Register a Buf account and follow the instruction to update your BUF_USER environment variable. Replace $BUF_USER with your own buf profile name.
 [BSR](https://docs.buf.build/tour/log-into-the-bsr)
 
 Push the build to BSR and update the import paths with with your BUF prod
@@ -34,9 +34,10 @@ import (
 
 ```
 
-Run
+Run the following command.
 ``` bash
-make buf-generate
+make buf-generate buf.build/$BUF_USER/grpc-gateway-swagger-buf
+make buf-push
 ```
 
 To run the grpc server and grpc-gateway,
