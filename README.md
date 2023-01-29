@@ -16,6 +16,24 @@ Clone the repository.bash
 git clone git@github.com:firacloudtech/grpc-gateway-with-swagger-with-buf.git
 ```
 
+Register a Buf account and follow the instruction to update your BUF_USER environment variable.
+[BSR](https://docs.buf.build/tour/log-into-the-bsr)
+
+Push the build to BSR and update the import paths with with your BUF prod
+
+``` bash
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+
+	orderv1 `github.com/$BUF_USER/grpc-grpc-gateway-swagger-buf/gen/go/order/v1`
+	productv1 "github.com/$BUF_USER/grpc-grpc-gateway-swagger-buf/gen/go/product/v1")
+
+```
+
 Run
 ``` bash
 make buf-generate
