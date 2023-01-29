@@ -5,11 +5,9 @@ import (
 	"fmt"
 	"log"
 
-	orderv1 "buf.build/gen/go/firacloudtech/grpc-echo-benchmark/protocolbuffers/go/order/v1"
-	productv1 "buf.build/gen/go/firacloudtech/grpc-echo-benchmark/protocolbuffers/go/product/v1"
+	orderv1 "github.com/firacloudtech/grpc-echo-benchmark/gen/go/order/v1"
+	productv1 "github.com/firacloudtech/grpc-echo-benchmark/gen/go/product/v1"
 
-	orderGrpc "buf.build/gen/go/firacloudtech/grpc-echo-benchmark/grpc/go/order/v1/orderv1grpc"
-	productGrpc "buf.build/gen/go/firacloudtech/grpc-echo-benchmark/grpc/go/product/v1/productv1grpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -26,8 +24,8 @@ func main() {
 }
 
 type combinedClient struct {
-	productClient productGrpc.ProductServiceClient
-	orderClient   orderGrpc.OrderServiceClient
+	productClient productv1.ProductServiceClient
+	orderClient   orderv1.OrderServiceClient
 }
 
 func run() error {
@@ -43,18 +41,18 @@ func run() error {
 
 	// create a combined client
 	combinedClient := &combinedClient{
-		productClient: productGrpc.NewProductServiceClient(conn),
-		orderClient:   orderGrpc.NewOrderServiceClient(conn),
+		productClient: productv1.NewProductServiceClient(conn),
+		orderClient:   orderv1.NewOrderServiceClient(conn),
 	}
 
-	if _, err := combinedClient.productClient.CreateProduct(context.Background(), &productv1.CreateRequest{
+	if _, err := combinedClient.productClient.CreateProduct(context.Background(), &productv1.CreateProductRequest{
 		Name: "Yogen",
 	}); err != nil {
 		return fmt.Errorf("failed to CreateProduct: %w", err)
 	}
 	log.Println("Successfully Created product")
 
-	if _, err := combinedClient.orderClient.CreateOrder(context.Background(), &orderv1.CreateRequest{
+	if _, err := combinedClient.orderClient.CreateOrder(context.Background(), &orderv1.CreateOrderRequest{
 		Name: "Yogen",
 	}); err != nil {
 		return fmt.Errorf("failed to CreateOrder: %w", err)

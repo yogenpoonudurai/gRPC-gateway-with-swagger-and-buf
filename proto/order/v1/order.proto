@@ -4,15 +4,15 @@ package order.v1;
 option go_package = "github.com/firacloudtech/grpc-echo-benchmark/proto/order";
 
 service OrderService {
-	rpc CreateOrder(CreateRequest) returns (CreateResponse){
+	rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse){
 	}
 }
 
 
-message CreateRequest {
+message CreateOrderRequest {
 string name = 1;
 }
 
-message CreateResponse {
+message CreateOrderResponse {
 	string message = 1;
 }

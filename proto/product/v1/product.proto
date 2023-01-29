@@ -1,20 +1,10 @@
 syntax = "proto3";
 package product.v1;
 
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-
 option go_package = "github.com/firacloudtech/grpc-echo-benchmark/proto/product";
 
-
-option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-  info: {version: "1.0"};
-  external_docs: {
-    url: "https://github.com/firacloudtech/grpc-echo-benchmark";
-    description: "gRPC gateway";
-  }
-  schemes: HTTPS;
-};
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 service ProductService {
@@ -26,7 +16,7 @@ service ProductService {
 
 		};
 		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) ={
-			summary: "Add a product"
+			 summary: "Add a product"
       description: "Add a product to the server."
       tags: "Product"
 		};
@@ -42,21 +32,26 @@ service ProductService {
   rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse) {}
 }
 
+
 message CreateProductRequest {
 	string name = 1;
 }
+
 
 message CreateProductResponse {
   string message = 1;
 }
 
+
 message ReadProductRequest {
   string id = 1;
 }
 
+
 message ReadProductResponse {
   string name = 1;
 }
+
 
 message UpdateProductRequest {
   string id = 1;
@@ -67,9 +62,11 @@ message UpdateProductResponse {
   bool success = 1;
 }
 
+
 message DeleteProductRequest {
   string id = 1;
 }
+
 
 message DeleteProductResponse {
   bool success = 1;

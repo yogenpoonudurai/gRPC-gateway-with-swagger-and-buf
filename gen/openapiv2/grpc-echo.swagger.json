@@ -1,16 +1,16 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "product/v1/product.proto",
-    "version": "1.0"
+    "title": "order/v1/order.proto",
+    "version": "version not set"
   },
   "tags": [
     {
+      "name": "OrderService"
+    },
+    {
       "name": "ProductService"
     }
-  ],
-  "schemes": [
-    "https"
   ],
   "consumes": [
     "application/json"
@@ -114,6 +114,14 @@
         }
       }
     },
+    "v1CreateOrderResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "v1CreateProductRequest": {
       "type": "object",
       "properties": {
@@ -162,9 +170,5 @@
         }
       }
     }
-  },
-  "externalDocs": {
-    "description": "gRPC gateway",
-    "url": "https://github.com/firacloudtech/grpc-echo-benchmark"
   }
 }

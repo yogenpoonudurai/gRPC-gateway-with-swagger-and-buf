@@ -7,11 +7,11 @@ managed:
       - buf.build/googleapis/googleapis
       - buf.build/grpc-ecosystem/grpc-gateway
 plugins:
-  - plugin: buf.build/protocolbuffers/go
+  - plugin: buf.build/protocolbuffers/go:v1.28.1
     out: gen/go
     opt: paths=source_relative
 
-  - plugin: buf.build/grpc/go
+  - plugin: buf.build/grpc/go:v1.2.0
     out: gen/go
     opt:
     - paths=source_relative
@@ -26,3 +26,4 @@ plugins:
 
   - plugin: buf.build/grpc-ecosystem/openapiv2
     out: gen/openapiv2
+    opt: allow_merge=true,merge_file_name=grpc-echo

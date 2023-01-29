@@ -9,13 +9,13 @@ import (
 	"sync"
 
 	// import module using buf
+	orderv1 "github.com/firacloudtech/grpc-echo-benchmark/gen/go/order/v1"
+	productv1 "github.com/firacloudtech/grpc-echo-benchmark/gen/go/product/v1"
 
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
-	orderv1 "github.com/firacloudtech/grpc-echo-benchmark/gen/go/order/v1"
-	productv1 "github.com/firacloudtech/grpc-echo-benchmark/gen/go/product/v1"
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 )
 
 var (
@@ -35,24 +35,23 @@ func NewServer() *combinedServer {
 
 func main() {
 	wg.Add(2)
-
 	go func() {
 		if err := run(); err != nil {
 			log.Fatal(err)
 		}
 		wg.Done()
 	}()
-
-	// wait till the grpc server is ready
-
 	go func() {
 
 		if err := runGrpcGateway(); err != nil {
 			log.Fatal(err)
 		}
+
 		wg.Done()
 	}()
+
 	wg.Wait()
+
 }
 
 func run() error {
@@ -76,20 +75,20 @@ func run() error {
 	}
 
 	return nil
+
 }
 
 func runGrpcGateway() error {
 	// grpc gateway server
 
-	gwmux := runtime.NewServeMux()
-	gwAddr := fmt.Sprintf("127.0.0.1:%d", gatewayPort)
-
-	conn, err := grpc.DialContext(context.Background(), fmt.Sprintf("127.0.0.1:%d", port), grpc.WithBlock(), grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.DialContext(context.Background(), "127.0.0.1:5002", grpc.WithBlock(), grpc.WithTransportCredentials(insecure.NewCredentials()))
 
 	if err != nil {
 		log.Fatalln("Failed to dial server:", err)
 	}
+	defer conn.Close()
 
+	gwmux := runtime.NewServeMux()
 	err = productv1.RegisterProductServiceHandler(context.Background(), gwmux, conn)
 
 	if err != nil {
@@ -97,13 +96,14 @@ func runGrpcGateway() error {
 	}
 
 	gwServer := &http.Server{
-		Addr:    gwAddr,
+		Addr:    fmt.Sprintf(":%v", gatewayPort),
 		Handler: gwmux,
 	}
 
-	log.Println("Serving gRPC-gateway on http://localhost:", gatewayPort)
+	log.Printf("Serving gRPC-gateway on http://127.0.0.1%v", gwServer.Addr)
 
-	if err := gwServer.ListenAndServe(); err != nil {
+	err = gwServer.ListenAndServe()
+	if err != nil {
 		return fmt.Errorf("failed to serve gRPC gateway server: %w", err)
 	}
 
@@ -123,12 +123,12 @@ func (s *combinedServer) CreateProduct(ctx context.Context, req *productv1.Creat
 
 }
 
-func (s *combinedServer) CreateOrder(ctx context.Context, req *orderv1.CreateRequest) (*orderv1.CreateResponse, error) {
+func (s *combinedServer) CreateOrder(ctx context.Context, req *orderv1.CreateOrderRequest) (*orderv1.CreateOrderResponse, error) {
 
 	name := req.GetName()
 
 	log.Printf("Got a request to create a order: %v\n", name)
 
-	return &orderv1.CreateResponse{}, nil
+	return &orderv1.CreateOrderResponse{}, nil
 
 }
