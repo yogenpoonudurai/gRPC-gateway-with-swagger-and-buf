@@ -6,3 +6,6 @@ run-server:
 
 run-client:
 	cd ./grpc-client && go run main.go
+
+buf-push:
+	cd ./proto && buf push

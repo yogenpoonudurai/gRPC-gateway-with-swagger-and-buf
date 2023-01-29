@@ -1,4 +1,4 @@
-module github.com/firacloudtech/grpc-echo-benchmark
+module github.com/firacloudtech/grpc-gateway-swagger-buf
 
 go 1.19
 
