@@ -6,25 +6,24 @@ option go_package = "github.com/firacloudtech/grpc-echo-benchmark/proto/product"
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
-
 service ProductService {
+
 	rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse){
 		option (google.api.http)= {
 
-			post : "/v1/products/create",
+			post : "/api/v1/products/create",
 			body: "*"
 
 		};
 		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) ={
 			 summary: "Add a product"
       description: "Add a product to the server."
-      tags: "Product"
 		};
 	}
 	rpc ReadProduct(ReadProductRequest) returns (ReadProductResponse) {
 
 		option (google.api.http) = {
-			post : "/v1/products/read",
+			post : "/api/v1/products/read",
 			body: "*"
 		};
 	}

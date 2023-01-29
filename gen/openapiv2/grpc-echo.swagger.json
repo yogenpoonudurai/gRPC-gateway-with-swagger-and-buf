@@ -19,7 +19,41 @@
     "application/json"
   ],
   "paths": {
-    "/v1/products/create": {
+    "/api/v1/orders/create": {
+      "post": {
+        "summary": "Add an order",
+        "description": "Add an order",
+        "operationId": "OrderService_CreateOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrderService"
+        ]
+      }
+    },
+    "/api/v1/products/create": {
       "post": {
         "summary": "Add a product",
         "description": "Add a product to the server.",
@@ -49,11 +83,11 @@
           }
         ],
         "tags": [
-          "Product"
+          "ProductService"
         ]
       }
     },
-    "/v1/products/read": {
+    "/api/v1/products/read": {
       "post": {
         "operationId": "ProductService_ReadProduct",
         "responses": {
@@ -111,6 +145,14 @@
           "items": {
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "v1CreateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
         }
       }
     },

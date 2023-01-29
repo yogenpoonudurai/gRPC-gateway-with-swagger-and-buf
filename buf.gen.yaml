@@ -23,7 +23,6 @@ plugins:
     - paths=source_relative
     - generate_unbound_methods=true
 
-
   - plugin: buf.build/grpc-ecosystem/openapiv2
     out: gen/openapiv2
     opt: allow_merge=true,merge_file_name=grpc-echo

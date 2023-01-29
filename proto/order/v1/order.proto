@@ -3,8 +3,21 @@ package order.v1;
 
 option go_package = "github.com/firacloudtech/grpc-echo-benchmark/proto/order";
 
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 service OrderService {
 	rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse){
+		option (google.api.http)= {
+
+			post : "/api/v1/orders/create",
+			body: "*"
+
+		};
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+			summary: "Add an order"
+			description: "Add an order"
+		};
 	}
 }
 

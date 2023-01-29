@@ -181,7 +181,7 @@ func RegisterProductServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/product.v1.ProductService/CreateProduct", runtime.WithHTTPPathPattern("/v1/products/create"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/product.v1.ProductService/CreateProduct", runtime.WithHTTPPathPattern("/api/v1/products/create"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -206,7 +206,7 @@ func RegisterProductServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/product.v1.ProductService/ReadProduct", runtime.WithHTTPPathPattern("/v1/products/read"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/product.v1.ProductService/ReadProduct", runtime.WithHTTPPathPattern("/api/v1/products/read"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -320,7 +320,7 @@ func RegisterProductServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/product.v1.ProductService/CreateProduct", runtime.WithHTTPPathPattern("/v1/products/create"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/product.v1.ProductService/CreateProduct", runtime.WithHTTPPathPattern("/api/v1/products/create"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -342,7 +342,7 @@ func RegisterProductServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/product.v1.ProductService/ReadProduct", runtime.WithHTTPPathPattern("/v1/products/read"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/product.v1.ProductService/ReadProduct", runtime.WithHTTPPathPattern("/api/v1/products/read"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -406,9 +406,9 @@ func RegisterProductServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 }
 
 var (
-	pattern_ProductService_CreateProduct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "products", "create"}, ""))
+	pattern_ProductService_CreateProduct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "products", "create"}, ""))
 
-	pattern_ProductService_ReadProduct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "products", "read"}, ""))
+	pattern_ProductService_ReadProduct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "products", "read"}, ""))
 
 	pattern_ProductService_UpdateProduct_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"product.v1.ProductService", "UpdateProduct"}, ""))
 
