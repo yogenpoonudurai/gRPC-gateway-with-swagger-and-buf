@@ -36,7 +36,7 @@ import (
 
 Run the following command.
 ``` bash
-make buf-generate buf.build/$BUF_USER/grpc-gateway-swagger-buf
+make buf-generate
 make buf-push
 ```
 

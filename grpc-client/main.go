@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
-	orderv1 "github.com/$BUF_USER/grpc-gateway-swagger-buf/gen/go/order/v1"
-	productv1 "github.com/$BUF_USER/grpc-gateway-swagger-buf/gen/go/product/v1"
+	orderv1 "github.com/firacloudtech/grpc-gateway-swagger-buf/gen/go/order/v1"
+	productv1 "github.com/firacloudtech/grpc-gateway-swagger-buf/gen/go/product/v1"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -53,7 +53,7 @@ func run() error {
 	log.Println("Successfully Created product")
 
 	if _, err := combinedClient.orderClient.CreateOrder(context.Background(), &orderv1.CreateOrderRequest{
-		Name: "Yogen",
+		Name: "Client1",
 	}); err != nil {
 		return fmt.Errorf("failed to CreateOrder: %w", err)
 
